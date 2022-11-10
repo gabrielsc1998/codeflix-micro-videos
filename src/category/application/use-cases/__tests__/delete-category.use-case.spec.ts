@@ -35,6 +35,7 @@ describe("Delete Category Use Case Unit Tests", () => {
 
     await useCase.execute({ id: items[0].id });
 
+    expect(repository.items).toHaveLength(0);
     expect(spyDelete).toHaveBeenCalledTimes(1);
     expect(spyFindById).toHaveBeenCalledTimes(1);
   });

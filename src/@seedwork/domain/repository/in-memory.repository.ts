@@ -1,4 +1,3 @@
-import { Category } from "category/domain/entities/category";
 import Entity from "../entity/entity";
 import NotFoundError from "../errors/not-found.error";
 import UniqueEntityId from "../value-objects/unique-entity-id.vo";
@@ -116,7 +115,3 @@ export abstract class InMemorySearchableRepository<E extends Entity>
     return items.slice(start, limit);
   }
 }
-
-//paginação -
-//ordenação - sort a > b 1 b > a -1 0
-//filtro -

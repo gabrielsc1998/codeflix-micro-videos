@@ -33,6 +33,19 @@ describe("Category Unit Tests", () => {
 
     category = new Category({
       name: "Movie",
+      description: "some description",
+      is_active: null,
+      created_at,
+    });
+    expect(category.props).toStrictEqual({
+      name: "Movie",
+      description: "some description",
+      is_active: true,
+      created_at,
+    });
+
+    category = new Category({
+      name: "Movie",
       description: "other description",
     });
     expect(category.props).toMatchObject({

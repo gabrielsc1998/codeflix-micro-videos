@@ -25,10 +25,6 @@ export class Category extends Entity<CategoryProperties> {
     return this.props.name;
   }
 
-  set x(data: string) {
-    this.description = data;
-  }
-
   private set name(value: string) {
     if (typeof value !== "string" || value.length === 0) {
       throw new Error("Invalid category name");

@@ -1,5 +1,8 @@
 import Entity from "../../../@seedwork/domain/entity/entity";
 import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
+import { EntityValidationError } from "../../../@seedwork/domain/errors/validation-error";
+
+import CategoryValidatorFactory from "../validators/category.validator";
 
 export type CategoryProperties = {
   name: string;
@@ -15,10 +18,34 @@ export type CategoryUpdate = {
 
 export class Category extends Entity<CategoryProperties> {
   constructor(public readonly props: CategoryProperties, id?: UniqueEntityId) {
+    Category.validate(props);
     super(props, id);
     this.description = this.props.description;
     this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
+  }
+
+  static validate(props: CategoryProperties) {
+    const validator = CategoryValidatorFactory.create();
+    const isValid = validator.validate(props);
+
+    if (!isValid) {
+      throw new EntityValidationError(validator.errors);
+    }
+  }
+
+  update(input: CategoryUpdate): void {
+    Category.validate({ ...input });
+    this.name = input.name;
+    this.description = input.description;
+  }
+
+  activate(): void {
+    this.is_active = true;
+  }
+
+  deactivate(): void {
+    this.is_active = false;
   }
 
   get name(): string {
@@ -26,9 +53,7 @@ export class Category extends Entity<CategoryProperties> {
   }
 
   private set name(value: string) {
-    if (typeof value !== "string" || value.length === 0) {
-      throw new Error("Invalid category name");
-    }
+    Category.validate({ name: value });
     this.props.name = value;
   }
 
@@ -50,18 +75,5 @@ export class Category extends Entity<CategoryProperties> {
 
   get created_at(): Date {
     return this.props.created_at;
-  }
-
-  update(input: CategoryUpdate): void {
-    this.name = input.name;
-    this.description = input.description;
-  }
-
-  activate(): void {
-    this.is_active = true;
-  }
-
-  deactivate(): void {
-    this.is_active = false;
   }
 }

@@ -1,5 +1,6 @@
 import { omit } from "lodash";
 
+import { EntityValidationError } from "../../../@seedwork/domain/errors/validation-error";
 import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
 
 import { Category, CategoryProperties, CategoryUpdate } from "./category";
@@ -188,7 +189,7 @@ describe("Category Unit Tests", () => {
         description: "some description",
       };
       expect(() => category.update(input)).toThrowError(
-        "Invalid category name"
+        new EntityValidationError(null)
       );
     });
   });

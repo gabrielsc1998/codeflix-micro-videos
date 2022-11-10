@@ -1,4 +1,4 @@
-import InvalidUuidError from "../../errors/invalid-uuid.error";
+import InvalidUuidError from "../errors/invalid-uuid.error";
 
 import { UUID } from "../utils/uuid/uuid";
 

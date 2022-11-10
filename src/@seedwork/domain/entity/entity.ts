@@ -2,7 +2,7 @@ import UniqueEntityId from "../value-objects/unique-entity-id.vo";
 
 type EntityToJson<Props> = Required<{ id: string } & Props>;
 
-export default abstract class Entity<Props> {
+export default abstract class Entity<Props = any> {
   public readonly uniqueEntityId: UniqueEntityId;
 
   constructor(public readonly props: Props, id?: UniqueEntityId) {

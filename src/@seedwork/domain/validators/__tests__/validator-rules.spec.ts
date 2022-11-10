@@ -1,4 +1,4 @@
-import {ValidationError} from "../../../domain/errors/validation-error";
+import { ValidationError } from "../../../domain/errors/validation-error";
 import ValidatorRules from "../validator-rules";
 
 type Values = {
@@ -33,8 +33,8 @@ function runRule({
   params = [],
 }: Omit<ExpectedRule, "error">) {
   const validator = ValidatorRules.values(value, property);
-  const method = validator[rule];
-  method.apply(validator, params);
+  const method = validator[rule] as () => void;
+  method.apply(validator, params as []);
 }
 
 describe("ValidatorRules Unit Tests", () => {

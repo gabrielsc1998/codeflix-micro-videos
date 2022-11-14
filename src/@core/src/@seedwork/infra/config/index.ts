@@ -12,12 +12,12 @@ type Config = {
   };
 };
 
-function makeConfig(envFile): Config {
+function makeConfig(envFile: string): Config {
   const output = loadEnv({ path: envFile });
-
+  console.log(output);
   return {
     db: {
-      vendor: output.parsed.DB_VENDOR as any,
+      vendor: output.parsed.DB_CONNECTION as any,
       host: output.parsed.DB_HOST,
       logging: output.parsed.DB_LOGGING === "true",
     },

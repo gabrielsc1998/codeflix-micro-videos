@@ -1,7 +1,7 @@
 import { Category } from "#category/domain";
 import { CategoryInMemoryRepository } from "#category/infra";
 import { NotFoundError } from "#seedwork/domain";
-import { UpdateCategoryUseCase } from "../update-category.use-case";
+import { UpdateCategoryUseCase } from "../../update-category.use-case";
 
 describe("UpdateCategoryUseCase Unit Tests", () => {
   let useCase: UpdateCategoryUseCase.UseCase;

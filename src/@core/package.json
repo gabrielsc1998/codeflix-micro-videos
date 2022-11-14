@@ -68,6 +68,7 @@
   },
   "dependencies": {
     "class-validator": "^0.13.2",
+    "dotenv": "^16.0.3",
     "sequelize": "^6.25.5",
     "sequelize-typescript": "^2.1.5",
     "sqlite3": "^5.1.2",

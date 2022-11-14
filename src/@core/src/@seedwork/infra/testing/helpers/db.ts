@@ -1,10 +1,10 @@
-import { config } from "#seedwork/infra/config";
+import { configTest } from "#seedwork/infra/config";
 import { Sequelize, SequelizeOptions } from "sequelize-typescript";
 
 const sequelizeOptions: SequelizeOptions = {
-  dialect: config.db.vendor,
-  host: config.db.host,
-  logging: config.db.logging,
+  dialect: configTest.db.vendor,
+  host: configTest.db.host,
+  logging: configTest.db.logging,
 };
 
 export function setupSequelize(options: SequelizeOptions = {}) {

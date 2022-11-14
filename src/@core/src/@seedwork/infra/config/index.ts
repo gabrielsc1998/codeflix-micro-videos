@@ -4,12 +4,24 @@ import { config as loadEnv } from "dotenv";
 
 const ENV_TEST_FILE = join(__dirname, "../../../../.env.test");
 
-loadEnv({ path: ENV_TEST_FILE });
-
-export const config = {
+type Config = {
   db: {
-    vendor: process.env.DB_CONNECTION as any,
-    host: process.env.DB_HOST,
-    logging: process.env.DB_LOGGING === "true",
-  },
+    vendor: any;
+    host: string;
+    logging: boolean;
+  };
 };
+
+function makeConfig(envFile): Config {
+  const output = loadEnv({ path: envFile });
+
+  return {
+    db: {
+      vendor: output.parsed.DB_VENDOR as any,
+      host: output.parsed.DB_HOST,
+      logging: output.parsed.DB_LOGGING === "true",
+    },
+  };
+}
+
+export const configTest = makeConfig(ENV_TEST_FILE);

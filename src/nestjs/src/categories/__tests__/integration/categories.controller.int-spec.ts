@@ -25,18 +25,18 @@ describe('CategoriesController Integration Tests', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
     console.log(controller);
-    // expect(controller['createUseCase']).toBeInstanceOf(
-    //   CreateCategoryUseCase.UseCase,
-    // );
-    // expect(controller['updateUseCase']).toBeInstanceOf(
-    //   UpdateCategoryUseCase.UseCase,
-    // );
-    // expect(controller['listUseCase']).toBeInstanceOf(
-    //   ListCategoriesUseCase.UseCase,
-    // );
-    // expect(controller['getUseCase']).toBeInstanceOf(GetCategoryUseCase.UseCase);
-    // expect(controller['deleteUseCase']).toBeInstanceOf(
-    //   DeleteCategoryUseCase.UseCase,
-    // );
+    expect(controller['createUseCase']).toBeInstanceOf(
+      CreateCategoryUseCase.UseCase,
+    );
+    expect(controller['updateUseCase']).toBeInstanceOf(
+      UpdateCategoryUseCase.UseCase,
+    );
+    expect(controller['listUseCase']).toBeInstanceOf(
+      ListCategoriesUseCase.UseCase,
+    );
+    expect(controller['getUseCase']).toBeInstanceOf(GetCategoryUseCase.UseCase);
+    expect(controller['deleteUseCase']).toBeInstanceOf(
+      DeleteCategoryUseCase.UseCase,
+    );
   });
 });

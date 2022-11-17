@@ -4,7 +4,9 @@
   "description": "admin do catalogo de videos",
   "main": "index.js",
   "imports": {
+    "#seedwork/domain": "./dist/@seedwork/domain/index.js",
     "#seedwork/*": "./dist/@seedwork/*.js",
+    "#category/domain": "./dist/category/domain/index.js",
     "#category/*": "./dist/category/*.js"
   },
   "exports": {
@@ -46,7 +48,7 @@
     "test": "jest",
     "test:cov": "npm run test -- --coverage",
     "cti": "cti",
-    "cti:@core": "sh ./cti.sh"
+    "cti:make": "sh ./cti.sh"
   },
   "keywords": [],
   "author": "",

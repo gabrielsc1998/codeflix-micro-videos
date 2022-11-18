@@ -30,7 +30,7 @@ describe("ListCategoriesUseCase Integration Tests", () => {
       });
 
     const output = await useCase.execute({});
-    console.log(output);
+
     expect(output).toMatchObject({
       items: [...models]
         .reverse()

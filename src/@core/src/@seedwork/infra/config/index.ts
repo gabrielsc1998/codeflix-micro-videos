@@ -14,7 +14,7 @@ type Config = {
 
 function makeConfig(envFile: string): Config {
   const output = loadEnv({ path: envFile });
-  console.log(output);
+
   return {
     db: {
       vendor: output.parsed.DB_VENDOR as any,

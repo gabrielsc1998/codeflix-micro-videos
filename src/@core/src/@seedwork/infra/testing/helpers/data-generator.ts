@@ -7,8 +7,10 @@ export class DataGenerator {
     return DataGenerator.lib.guid({ version: 4 });
   }
 
-  static word(): string {
-    return DataGenerator.lib.word();
+  static word(options?: { length?: number }): string {
+    return DataGenerator.lib.word(
+      typeof options?.length === "number" && { length: options.length }
+    );
   }
 
   static text(): string {

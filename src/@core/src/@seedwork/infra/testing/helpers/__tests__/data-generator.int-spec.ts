@@ -15,6 +15,12 @@ describe("Data Generator Integration Test", () => {
     expect(output.length > 0).toBeTruthy();
   });
 
+  it("should generate a word with defined length", () => {
+    const output = DataGenerator.word({ length: 256 });
+    expect(typeof output).toBe("string");
+    expect(output.length === 256).toBeTruthy();
+  });
+
   it("should generate a text", () => {
     const output = DataGenerator.text();
     expect(typeof output).toBe("string");

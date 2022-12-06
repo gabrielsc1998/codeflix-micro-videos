@@ -35,6 +35,21 @@ describe("CategorySequelizeRepository Unit Tests", () => {
     expect(model.toJSON()).toStrictEqual(category.toJSON());
   });
 
+  it("should inserts many entities", async () => {
+    const categories = [
+      new Category({ name: "cat 1" }),
+      new Category({ name: "cat 2" }),
+      new Category({ name: "cat 3" }),
+    ];
+    await repository.bulkInsert(categories);
+
+    const foundCategories = await CategoryModel.findAll();
+
+    expect(foundCategories.map((category) => category.toJSON())).toMatchObject(
+      categories.map((category) => category.toJSON())
+    );
+  });
+
   it("should throws error when entity not found", async () => {
     await expect(repository.findById("fake id")).rejects.toThrow(
       new NotFoundError("Entity Not Found using ID fake id")

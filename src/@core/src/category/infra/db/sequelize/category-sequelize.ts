@@ -71,6 +71,11 @@ export namespace CategorySequelize {
       await this.categoryModel.create(entity.toJSON());
     }
 
+    async bulkInsert(entities: Category[]): Promise<void> {
+      const categories = entities.map((entity) => entity.toJSON());
+      await this.categoryModel.bulkCreate(categories);
+    }
+
     async findById(id: string | UniqueEntityId): Promise<Category> {
       //DDD Entidade - regras - valida
       const _id = `${id}`;

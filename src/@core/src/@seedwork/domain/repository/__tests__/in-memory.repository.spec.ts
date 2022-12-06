@@ -21,6 +21,16 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(entity.toJSON()).toStrictEqual(repository.items[0].toJSON());
   });
 
+  it("should inserts many entities", async () => {
+    const entities = [
+      new StubEntity({ name: "entity 1", price: 5 }),
+      new StubEntity({ name: "entity 2", price: 5 }),
+      new StubEntity({ name: "entity 3", price: 5 }),
+    ];
+    await repository.bulkInsert(entities);
+    expect(entities).toStrictEqual(repository.items);
+  });
+
   it("should throws error when entity not found", () => {
     expect(repository.findById("fake id")).rejects.toThrow(
       new NotFoundError("Entity Not Found using ID fake id")

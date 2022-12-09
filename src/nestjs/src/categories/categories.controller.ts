@@ -1,11 +1,4 @@
 import {
-  CreateCategoryUseCase,
-  DeleteCategoryUseCase,
-  GetCategoryUseCase,
-  ListCategoriesUseCase,
-  UpdateCategoryUseCase,
-} from '@fc/micro-videos/category/application';
-import {
   Controller,
   Get,
   Post,
@@ -17,14 +10,23 @@ import {
   HttpCode,
   Query,
 } from '@nestjs/common';
+
+import {
+  CreateCategoryUseCase,
+  DeleteCategoryUseCase,
+  GetCategoryUseCase,
+  ListCategoriesUseCase,
+  UpdateCategoryUseCase,
+} from '@fc/micro-videos/category/application';
+
+import {
+  CategoryPresenter,
+  CategoryCollectionPresenter,
+} from './presenter/category.presenter';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { SearchCategoryDto } from './dto/search-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
-//Unit tests
-
-// Inject - casos - mongoose, typeorm
-//unidade - request e response
 @Controller('categories')
 export class CategoriesController {
   @Inject(CreateCategoryUseCase.UseCase)
@@ -42,32 +44,34 @@ export class CategoriesController {
   @Inject(ListCategoriesUseCase.UseCase)
   private listUseCase: ListCategoriesUseCase.UseCase;
 
-  //Arquitetura Hexagonal - Ports
-
   @Post()
   async create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.createUseCase.execute(createCategoryDto);
+    const output = await this.createUseCase.execute(createCategoryDto);
+    return new CategoryPresenter(output);
   }
 
   @Get()
-  search(@Query() searchParams: SearchCategoryDto) {
-    return this.listUseCase.execute(searchParams);
+  async search(@Query() searchParams: SearchCategoryDto) {
+    const output = await this.listUseCase.execute(searchParams);
+    return new CategoryCollectionPresenter(output);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.getUseCase.execute({ id });
+  async findOne(@Param('id') id: string) {
+    const output = await this.getUseCase.execute({ id });
+    return new CategoryPresenter(output);
   }
 
-  @Put(':id') //PUT vs PATCH
-  update(
+  @Put(':id')
+  async update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
-    return this.updateUseCase.execute({
+    const output = await this.updateUseCase.execute({
       id,
       ...updateCategoryDto,
     });
+    return new CategoryPresenter(output);
   }
 
   @HttpCode(204)

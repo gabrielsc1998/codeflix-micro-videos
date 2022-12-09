@@ -1,4 +1,4 @@
-import { Category } from "./category";
+import { Category } from "../category";
 
 const NAME_ERRORS = {
   EMPTY: "name should not be empty",

@@ -1,9 +1,8 @@
 import { omit } from "lodash";
 
-import { EntityValidationError } from "../../../@seedwork/domain/errors/validation-error";
-import { UniqueEntityId } from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
+import { EntityValidationError, UniqueEntityId } from "#seedwork/domain";
 
-import { Category, CategoryProperties, CategoryUpdate } from "./category";
+import { Category, CategoryProperties, CategoryUpdate } from "../category";
 
 describe("Category Unit Tests", () => {
   test("constructor of category", () => {

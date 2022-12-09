@@ -9,7 +9,12 @@ export default {
   transform: {
     '^.+\\.(t|j)s$': '@swc/jest',
   },
-  collectCoverageFrom: ['**/*.(t|j)s'],
+  collectCoverageFrom: [
+    '**/*.(t|j)s',
+    '!<rootDir>/main.ts',
+    '!<rootDir>/app.module.ts',
+    '!<rootDir>/@share/@share.module.ts',
+  ],
   coverageProvider: 'v8',
   coverageDirectory: '../__coverage',
   testEnvironment: 'node',

@@ -17,7 +17,7 @@ import { CONFIG_SCHEMA_TYPE } from '../config/config.module';
             host: config.get('DB_HOST'),
             models,
             autoLoadModels: config.get('DB_AUTO_LOAD_MODELS'),
-            logging: config.get('DB_LOGGING'),
+            logging: Boolean(config.get('DB_LOGGING')),
           };
         }
 

@@ -13,12 +13,13 @@ import {
 } from '@fc/micro-videos/@seedwork/domain';
 import { Category, CategoryRepository } from '@fc/micro-videos/category/domain';
 
+import { CategoryCollectionPresenter } from '../../../categories/presenter/category.presenter';
+
 import { CATEGORY_PROVIDERS } from '../../category.providers';
 import { ConfigModule } from '../../../config/config.module';
 import { DatabaseModule } from '../../../database/database.module';
 import { CategoriesModule } from '../../categories.module';
 import { CategoriesController } from '../../categories.controller';
-import { CategoryCollectionPresenter } from 'src/categories/presenter/category.presenter';
 
 describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;

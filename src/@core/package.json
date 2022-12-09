@@ -4,14 +4,19 @@
   "description": "admin do catalogo de videos",
   "main": "index.js",
   "imports": {
+    "#seedwork/application": "./dist/@seedwork/application/index.js",
+    "#seedwork/infra": "./dist/@seedwork/infra/index.js",
     "#seedwork/domain": "./dist/@seedwork/domain/index.js",
     "#seedwork/*": "./dist/@seedwork/*.js",
+    "#category/application": "./dist/category/application/index.js",
+    "#category/infra": "./dist/category/infra/index.js",
     "#category/domain": "./dist/category/domain/index.js",
     "#category/*": "./dist/category/*.js"
   },
   "exports": {
     "./@seedwork/application": "./dist/@seedwork/application/index.js",
     "./@seedwork/domain": "./dist/@seedwork/domain/index.js",
+    "./@seedwork/infra": "./dist/@seedwork/infra/index.js",
     "./category/application": "./dist/category/application/index.js",
     "./category/domain": "./dist/category/domain/index.js",
     "./category/infra": "./dist/category/infra/index.js"

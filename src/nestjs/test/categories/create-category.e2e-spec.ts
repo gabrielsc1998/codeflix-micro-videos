@@ -1,6 +1,5 @@
 import { HttpStatus } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
-import { getConnectionToken } from '@nestjs/sequelize';
 
 import { CategoryRepository } from '@fc/micro-videos/category/domain';
 
@@ -53,8 +52,6 @@ describe('CategoriesController - /categories (POST) - e2e', () => {
     const arrange = CreateCategoryFixture.arrangeForSave();
     let categoryRepo: CategoryRepository.Repository;
     beforeEach(async () => {
-      const sequelize = app.app.get(getConnectionToken());
-      await sequelize.sync({ force: true });
       categoryRepo = app.app.get<CategoryRepository.Repository>(
         CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
       );

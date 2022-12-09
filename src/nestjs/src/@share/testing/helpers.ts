@@ -5,6 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { AppModule } from '../../app.module';
 import { applyGlobalConfig } from '../../global-config';
+import { getConnectionToken } from '@nestjs/sequelize';
 
 export type Client = supertest.SuperTest<supertest.Test>;
 
@@ -27,6 +28,9 @@ export function startApp(options?: Options) {
     if (options?.disableGlobalPipes) {
       _app['config'].globalPipes = [];
     }
+
+    const sequelize = _app.get(getConnectionToken());
+    await sequelize.sync({ force: true });
 
     await _app.init();
   });

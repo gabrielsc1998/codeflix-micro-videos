@@ -1,4 +1,4 @@
-import { configTest } from "#seedwork/infra/config";
+import { configTest } from "#seedwork/infra";
 import { Sequelize, SequelizeOptions } from "sequelize-typescript";
 
 const sequelizeOptions: SequelizeOptions = {

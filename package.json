@@ -12,7 +12,8 @@
     "start:dev": "npm run build:w -w @fc/micro-videos & npm run start:dev -w nestjs",
     "tsc": "tsc",
     "tsc:check": "npm run tsc --workspaces -- --noEmit",
-    "test": "jest"
+    "test": "jest",
+    "build:core": "npm run build -w @fc/micro-videos"
   },
   "repository": {
     "type": "git",

@@ -5,6 +5,8 @@ import {
 } from "#seedwork/domain";
 import { CategoryValidatorFactory } from "../validators";
 
+import { CategoryFakeBuilder } from "./category-fake-builder";
+
 export type CategoryProperties = {
   name: string;
   description?: string;
@@ -76,5 +78,9 @@ export class Category extends Entity<CategoryProperties> {
 
   get created_at(): Date {
     return this.props.created_at;
+  }
+
+  static fake() {
+    return CategoryFakeBuilder;
   }
 }

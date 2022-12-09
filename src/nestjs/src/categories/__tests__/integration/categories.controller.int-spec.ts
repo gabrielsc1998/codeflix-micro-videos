@@ -270,14 +270,12 @@ describe('CategoriesController Integration Tests', () => {
     });
 
     it('should returns output using pagination, sort and filter', async () => {
-      const faker: any = Category.fake().aCategory();
-      const categories = [
-        faker.withName('a').build(),
-        faker.withName('AAA').build(),
-        faker.withName('AaA').build(),
-        faker.withName('b').build(),
-        faker.withName('c').build(),
-      ];
+      const names = ['a', 'AAA', 'AaA', 'b', 'c'];
+      const categories: any = Category.fake()
+        .theCategories(names.length)
+        .withName((index) => names[index])
+        .build();
+
       await repository.bulkInsert(categories);
 
       const arrange_asc = [

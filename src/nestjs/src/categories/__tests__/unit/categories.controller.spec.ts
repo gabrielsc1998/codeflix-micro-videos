@@ -6,7 +6,10 @@ import {
 } from '@fc/micro-videos/category/application';
 import { SortDirection } from '@fc/micro-videos/@seedwork/domain';
 
-import { CategoryPresenter } from '../../presenter/category.presenter';
+import {
+  CategoryPresenter,
+  CategoryCollectionPresenter,
+} from '../../presenter/category.presenter';
 import { CategoriesController } from '../../categories.controller';
 import { CreateCategoryDto } from '../../dto/create-category.dto';
 import { UpdateCategoryDto } from '../../dto/update-category.dto';
@@ -131,6 +134,8 @@ describe('CategoriesController Unit Tests', () => {
     };
     const output = await controller.search(searchParams);
     expect(mockListUseCase.execute).toHaveBeenCalledWith(searchParams);
-    expect(expectedOutput).toStrictEqual(output);
+    expect(new CategoryCollectionPresenter(expectedOutput)).toStrictEqual(
+      output,
+    );
   });
 });

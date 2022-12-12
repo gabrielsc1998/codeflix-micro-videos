@@ -8,6 +8,7 @@ import { Reflector } from '@nestjs/core';
 
 import {
   NotFoundErrorFilter,
+  InvalidUUIDErrorFilter,
   EntityValidationErrorFilter,
 } from './@share/exception-filters';
 import { WrapperDataInterceptor } from './@share/interceptors';
@@ -26,6 +27,7 @@ export function applyGlobalConfig(app: INestApplication) {
 
   app.useGlobalFilters(
     new NotFoundErrorFilter(),
+    new InvalidUUIDErrorFilter(),
     new EntityValidationErrorFilter(),
   );
 }

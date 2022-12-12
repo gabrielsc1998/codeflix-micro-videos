@@ -9,6 +9,7 @@ import {
   Put,
   HttpCode,
   Query,
+  HttpStatus,
 } from '@nestjs/common';
 
 import {
@@ -19,6 +20,8 @@ import {
   ListCategoriesUseCase,
   UpdateCategoryUseCase,
 } from '@fc/micro-videos/category/application';
+
+import { UUIDPipe } from '../@share/pipes';
 
 import {
   CategoryPresenter,
@@ -58,14 +61,14 @@ export class CategoriesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', UUIDPipe()) id: string) {
     const output = await this.getUseCase.execute({ id });
     return CategoriesController.toOutput(output);
   }
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', UUIDPipe()) id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
     const output = await this.updateUseCase.execute({
@@ -75,9 +78,9 @@ export class CategoriesController {
     return CategoriesController.toOutput(output);
   }
 
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', UUIDPipe()) id: string) {
     return this.deleteUseCase.execute({ id });
   }
 

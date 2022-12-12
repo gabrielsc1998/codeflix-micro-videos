@@ -10,6 +10,11 @@ import { CategoriesModule } from './categories/categories.module';
 @Module({
   controllers: [AppController],
   providers: [AppService],
-  imports: [ConfigModule.forRoot(), CategoriesModule, DatabaseModule, ShareModule],
+  imports: [
+    ConfigModule.forRoot(),
+    CategoriesModule,
+    DatabaseModule,
+    ShareModule,
+  ],
 })
 export class AppModule {}

@@ -42,7 +42,7 @@ export namespace CategorySequelize {
     @Column({ allowNull: false, type: DataType.BOOLEAN })
     declare is_active: boolean;
 
-    @Column({ allowNull: false, type: DataType.DATE })
+    @Column({ allowNull: false, type: DataType.DATE(3) })
     declare created_at: Date;
 
     static factory() {

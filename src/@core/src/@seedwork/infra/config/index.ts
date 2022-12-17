@@ -24,4 +24,4 @@ function makeConfig(envFile: string): Config {
   };
 }
 
-export const configTest = makeConfig(ENV_TEST_FILE);
+export const loadConfigTest = () => makeConfig(ENV_TEST_FILE);

@@ -3,9 +3,10 @@ import { Test } from '@nestjs/testing';
 import { Sequelize } from 'sequelize-typescript';
 import { getConnectionToken } from '@nestjs/sequelize';
 
-import { ConfigModule, CONFIG_DB_SCHEMA } from '../config/config.module';
+import { ConfigModule } from '../config/config.module';
 
 import { DatabaseModule } from './database.module';
+import { CONFIG_DB_SCHEMA } from '../config/schemas/db.schema';
 
 describe('DatabaseModule Unit Tests', () => {
   describe('sqlite connection', () => {

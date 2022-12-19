@@ -14,7 +14,8 @@
     "tsc:check": "npm run tsc --workspaces -- --noEmit",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "build:core": "npm run build -w @fc/micro-videos"
+    "build:core": "npm run build -w @fc/micro-videos",
+    "test:e2e": "npm run test:e2e -w nestjs"
   },
   "repository": {
     "type": "git",

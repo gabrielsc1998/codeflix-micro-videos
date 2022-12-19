@@ -154,96 +154,26 @@ describe('CategoriesController Integration Tests', () => {
       );
     });
 
-    it('should returns output using pagination, sort and filter', async () => {
-      const names = ['a', 'AAA', 'AaA', 'b', 'c'];
-      const categories: any = Category.fake()
-        .theCategories(names.length)
-        .withName((index) => names[index])
-        .build();
+    describe('should returns output using pagination, sort and filter', () => {
+      const { entitiesMap, arrange } = ListCategoriesFixture.arrangeUnsorted();
 
-      await repository.bulkInsert(categories);
+      beforeEach(async () => {
+        await repository.bulkInsert(Object.values(entitiesMap));
+      });
 
-      const arrange_asc = [
-        {
-          send_data: {
-            page: 1,
-            per_page: 2,
-            sort: 'name',
-            filter: 'a',
-          },
-          expected: {
-            items: [categories[1], categories[2]],
-            current_page: 1,
-            last_page: 2,
-            per_page: 2,
-            total: 3,
-          },
+      test.each(arrange)(
+        'when send_data is $send_data',
+        async ({ send_data, expected }) => {
+          const presenter = await controller.search(send_data);
+          const { entities, ...paginationProps }: any = expected;
+          expect(presenter).toEqual(
+            new CategoryCollectionPresenter({
+              items: entities,
+              ...paginationProps.meta,
+            }),
+          );
         },
-        {
-          send_data: {
-            page: 2,
-            per_page: 2,
-            sort: 'name',
-            filter: 'a',
-          },
-          expected: {
-            items: [categories[0]],
-            current_page: 2,
-            last_page: 2,
-            per_page: 2,
-            total: 3,
-          },
-        },
-      ];
-
-      for (const item of arrange_asc) {
-        const presenter = await controller.search(item.send_data);
-        expect(presenter).toEqual(
-          new CategoryCollectionPresenter(item.expected),
-        );
-      }
-
-      const arrange_desc = [
-        {
-          send_data: {
-            page: 1,
-            per_page: 2,
-            sort: 'name',
-            sort_dir: 'desc' as SortDirection,
-            filter: 'a',
-          },
-          expected: {
-            items: [categories[0], categories[2]],
-            current_page: 1,
-            last_page: 2,
-            per_page: 2,
-            total: 3,
-          },
-        },
-        {
-          send_data: {
-            page: 2,
-            per_page: 2,
-            sort: 'name',
-            sort_dir: 'desc' as SortDirection,
-            filter: 'a',
-          },
-          expected: {
-            items: [categories[1]],
-            current_page: 2,
-            last_page: 2,
-            per_page: 2,
-            total: 3,
-          },
-        },
-      ];
-
-      for (const item of arrange_desc) {
-        const presenter = await controller.search(item.send_data);
-        expect(presenter).toEqual(
-          new CategoryCollectionPresenter(item.expected),
-        );
-      }
+      );
     });
   });
 });

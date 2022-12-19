@@ -1,11 +1,10 @@
 import supertest from 'supertest';
-
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { getConnectionToken } from '@nestjs/sequelize';
 
 import { AppModule } from '../../app.module';
 import { applyGlobalConfig } from '../../global-config';
-import { getConnectionToken } from '@nestjs/sequelize';
 
 export type Client = supertest.SuperTest<supertest.Test>;
 
@@ -29,8 +28,7 @@ export function startApp(options?: Options) {
       _app['config'].globalPipes = [];
     }
 
-    const sequelize = _app.get(getConnectionToken());
-    await sequelize.sync({ force: true });
+    await dbConfig(_app);
 
     await _app.init();
   });
@@ -50,3 +48,8 @@ export function startApp(options?: Options) {
     },
   };
 }
+
+const dbConfig = async (app: INestApplication) => {
+  const sequelize = app.get(getConnectionToken());
+  await sequelize.sync({ force: true });
+};

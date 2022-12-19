@@ -26,15 +26,16 @@ describe('CategoriesController - /categories (GET) - e2e', () => {
       'when query params is $send_data',
       async ({ send_data, expected }) => {
         const queryParams = new URLSearchParams(send_data as any).toString();
-        return app.client
+        const res = await app.client
           .get(`/categories/?${queryParams}`)
-          .expect(HttpStatus.OK)
-          .expect({
-            data: expected.entities.map((e: any) =>
-              instanceToPlain(CategoriesController.toOutput(e)),
-            ),
-            meta: expected.meta,
-          });
+          .expect(HttpStatus.OK);
+
+        expect(res.body).toStrictEqual({
+          data: expected.entities.map((e: any) =>
+            instanceToPlain(CategoriesController.toOutput(e)),
+          ),
+          meta: expected.meta,
+        });
       },
     );
   });
@@ -42,7 +43,8 @@ describe('CategoriesController - /categories (GET) - e2e', () => {
   describe('should return categories using paginate, filter and sort', () => {
     let categoryRepo: CategoryRepository.Repository;
     const app = startApp();
-    const { entitiesMap, arrange } = ListCategoriesFixture.arrangeUnsorted();
+    const { entitiesMap, arrange } =
+      ListCategoriesFixture.arrangeIncrementedWithCreatedAt();
 
     beforeEach(async () => {
       categoryRepo = app.app.get<CategoryRepository.Repository>(
@@ -55,15 +57,16 @@ describe('CategoriesController - /categories (GET) - e2e', () => {
       'when query params is $send_data',
       async ({ send_data, expected }) => {
         const queryParams = new URLSearchParams(send_data as any).toString();
-        return app.client
+        const res = await app.client
           .get(`/categories/?${queryParams}`)
-          .expect(HttpStatus.OK)
-          .expect({
-            data: expected.entities.map((e: any) =>
-              instanceToPlain(CategoriesController.toOutput(e)),
-            ),
-            meta: expected.meta,
-          });
+          .expect(HttpStatus.OK);
+
+        expect(res.body).toStrictEqual({
+          data: expected.entities.map((e: any) =>
+            instanceToPlain(CategoriesController.toOutput(e)),
+          ),
+          meta: expected.meta,
+        });
       },
     );
   });

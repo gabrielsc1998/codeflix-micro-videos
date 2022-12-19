@@ -55,7 +55,7 @@ describe("CategoryModel Unit Tests", () => {
       field: "created_at",
       fieldName: "created_at",
       allowNull: false,
-      type: DataType.DATE(),
+      type: DataType.DATE(3),
     });
   });
 
@@ -69,14 +69,4 @@ describe("CategoryModel Unit Tests", () => {
     const category = await CategoryModel.create(arrange);
     expect(category.toJSON()).toStrictEqual(arrange);
   });
-
-  //primeiro criou categorias
-  //segundo criou categorias
-
-  // sqlite - memory
-
-  //iniciar a conexão
-  //criar tabelas
-  //testes
-  //desconecte banco
 });

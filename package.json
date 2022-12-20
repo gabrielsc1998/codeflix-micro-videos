@@ -15,7 +15,8 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "build:core": "npm run build -w @fc/micro-videos",
-    "test:e2e": "npm run test:e2e -w nestjs"
+    "test:e2e": "npm run test:e2e -w nestjs",
+    "migrations": "node_modules/.bin/ts-node src/@core/src/@seedwork/infra/db/sequelize/migrator.ts"
   },
   "repository": {
     "type": "git",

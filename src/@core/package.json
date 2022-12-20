@@ -80,6 +80,7 @@
     "sequelize": "^6.25.5",
     "sequelize-typescript": "^2.1.5",
     "sqlite3": "^5.1.2",
+    "umzug": "^3.2.1",
     "uuid": "^8.3.2"
   }
 }

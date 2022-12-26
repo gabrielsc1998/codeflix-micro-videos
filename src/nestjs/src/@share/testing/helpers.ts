@@ -1,7 +1,11 @@
 import supertest from 'supertest';
+import { Sequelize } from 'sequelize';
+import { ConfigService } from '@nestjs/config';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getConnectionToken } from '@nestjs/sequelize';
+
+import { migrator } from '@fc/micro-videos/@seedwork/infra';
 
 import { AppModule } from '../../app.module';
 import { applyGlobalConfig } from '../../global-config';
@@ -50,6 +54,20 @@ export function startApp(options?: Options) {
 }
 
 const dbConfig = async (app: INestApplication) => {
-  const sequelize = app.get(getConnectionToken());
-  await sequelize.sync({ force: true });
+  const canRunMigrations = !app.get(ConfigService).get('DB_AUTO_LOAD_MODELS');
+
+  const sequelize = app.get<Sequelize>(getConnectionToken());
+
+  try {
+    if (canRunMigrations) {
+      const umzug = migrator(sequelize);
+      await sequelize.drop();
+      await umzug.up();
+    } else {
+      await sequelize.sync({ force: true });
+    }
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 };

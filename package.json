@@ -15,6 +15,7 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "build:core": "npm run build -w @fc/micro-videos",
+    "cti:core": "npm run cti:make -w @fc/micro-videos",
     "test:e2e": "npm run test:e2e -w nestjs"
   },
   "repository": {

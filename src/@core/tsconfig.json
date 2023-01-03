@@ -8,11 +8,18 @@
       ],
       "#category/*": [
         "./category/*"
+      ],
+      "#cast-member/*": [
+        "./cast-member/*"
       ]
     },
     "outDir": "./dist",
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
   "include": [
     "./src/"
-  ]
+  ],
 }

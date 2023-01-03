@@ -11,7 +11,11 @@
     "#category/application": "./dist/category/application/index.js",
     "#category/infra": "./dist/category/infra/index.js",
     "#category/domain": "./dist/category/domain/index.js",
-    "#category/*": "./dist/category/*.js"
+    "#category/*": "./dist/category/*.js",
+    "#cast-member/application": "./dist/cast-member/application/index.js",
+    "#cast-member/infra": "./dist/cast-member/infra/index.js",
+    "#cast-member/domain": "./dist/cast-member/domain/index.js",
+    "#cast-member/*": "./dist/cast-member/*.js"
   },
   "exports": {
     "./@seedwork/application": "./dist/@seedwork/application/index.js",
@@ -19,7 +23,10 @@
     "./@seedwork/infra": "./dist/@seedwork/infra/index.js",
     "./category/application": "./dist/category/application/index.js",
     "./category/domain": "./dist/category/domain/index.js",
-    "./category/infra": "./dist/category/infra/index.js"
+    "./category/infra": "./dist/category/infra/index.js",
+    "./cast-member/application": "./dist/cast-member/application/index.js",
+    "./cast-member/domain": "./dist/cast-member/domain/index.js",
+    "./cast-member/infra": "./dist/cast-member/infra/index.js"
   },
   "typesVersions": {
     ">=4.0": {
@@ -40,15 +47,24 @@
       ],
       "category/infra": [
         "./dist/category/infra/index.d.ts"
+      ],
+      "cast-member/application": [
+        "./dist/cast-member/application/index.d.ts"
+      ],
+      "cast-member/domain": [
+        "./dist/cast-member/domain/index.d.ts"
+      ],
+      "cast-member/infra": [
+        "./dist/cast-member/infra/index.d.ts"
       ]
     }
   },
   "scripts": {
     "ts-node": "ts-node",
-    "tsc": "tsc",
-    "tsc:check": "npm run tsc -- --noEmit",
-    "build": "tsc -b ./tsconfig.json",
-    "build:w": "tsc -b ./tsconfig.json -w",
+    "tsc": "ttsc",
+    "tsc:check": "npm run ttsc -- --noEmit",
+    "build": "ttsc -b ./tsconfig.build.json",
+    "build:w": "ttsc -b ./tsconfig.build.json -w",
     "clean:tsc": "rm tsconfig.tsbuildinfo",
     "test": "jest",
     "test:cov": "npm run test -- --coverage",
@@ -75,7 +91,9 @@
     "jest": "^27.5.1",
     "regenerator-runtime": "^0.13.9",
     "ts-node": "^10.5.0",
-    "typescript": "^4.5.5"
+    "ttypescript": "^1.5.15",
+    "typescript": "^4.5.5",
+    "typescript-transform-paths": "^3.4.4"
   },
   "dependencies": {
     "class-validator": "^0.13.2",

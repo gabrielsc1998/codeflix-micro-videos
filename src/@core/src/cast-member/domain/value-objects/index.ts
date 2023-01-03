@@ -1,3 +1,3 @@
 // created from 'create-ts-index'
 
-export * from "./cast-member-type";
+export * from './cast-member-type';
